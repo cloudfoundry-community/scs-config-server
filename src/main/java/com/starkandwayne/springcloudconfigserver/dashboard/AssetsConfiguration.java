@@ -7,15 +7,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 
 @Order(0)
 @Configuration
+@EnableWebSecurity
 @Profile({"!test", "dashboardTest"})
-public class AssetsConfiguration extends WebSecurityConfigurerAdapter {
+public class AssetsConfiguration {
    private final ApplicationContext applicationContext;
    private String ASSETS_URL_PREFIX = "/assets/**";
 
@@ -36,7 +37,12 @@ public class AssetsConfiguration extends WebSecurityConfigurerAdapter {
       return assetsHandlerMapping;
    }
 
-   protected void configure(HttpSecurity http) throws Exception {
-      ((ExpressionUrlAuthorizationConfigurer<HttpSecurity>.AuthorizedUrl)((HttpSecurity)http.antMatcher(this.ASSETS_URL_PREFIX).headers().cacheControl().disable().and()).authorizeRequests().anyRequest()).permitAll();
+   @Bean
+   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+       http
+           .securityMatcher (ASSETS_URL_PREFIX)
+           .headers(headers -> headers.cacheControl(cache -> cache.disable()))
+           .authorizeHttpRequests(authorize -> authorize.requestMatchers(ASSETS_URL_PREFIX).permitAll());
+       return http.build();
    }
 }
