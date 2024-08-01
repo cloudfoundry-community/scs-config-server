@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.starkandwayne</groupId>
 	<artifactId>spring-cloud-config-server</artifactId>
-	<version>1.0.9-GSR3</version>
+	<version>2.0.0-2023.0.1</version>
 	<name>spring-cloud-config-server</name>
-	<description>Stark &amp; Wayne Spring Cloud Congfig Server based on Greenwich SR3</description>
+	<description>Stark &amp; Wayne Spring Cloud Congfig Server based on 2023.0.1</description>
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2023.0.1</spring-cloud.version>
