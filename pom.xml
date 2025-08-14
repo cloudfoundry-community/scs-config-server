@@ -5,17 +5,17 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>3.3.7</version>
+		<relativePath/>
 	</parent>
 	<groupId>com.starkandwayne</groupId>
 	<artifactId>spring-cloud-config-server</artifactId>
-	<version>2.0.0-2023.0.1</version>
+	<version>2.0.1-2023.0.4</version>
 	<name>spring-cloud-config-server</name>
-	<description>Stark &amp; Wayne Spring Cloud Congfig Server based on 2023.0.1</description>
+	<description>Stark &amp; Wayne Spring Cloud Congfig Server based on 2023.0.4</description>
 	<properties>
 		<java.version>17</java.version>
-		<spring-cloud.version>2023.0.1</spring-cloud.version>
+		<spring-cloud.version>2023.0.4</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -27,16 +27,21 @@
 		<artifactId>spring-credhub-starter</artifactId>
 		<version>3.1.0</version>
 	    </dependency>
+		<!-- Explicitly pin core to match starter; Spring Cloud BOM forces older 2.x otherwise -->
 		<dependency>
-            <groupId>org.springframework.credhub</groupId>
-            <artifactId>spring-credhub-core</artifactId>
-            <version>3.1.0</version>
-        </dependency>
+			<groupId>org.springframework.credhub</groupId>
+			<artifactId>spring-credhub-core</artifactId>
+			<version>3.1.0</version>
+		</dependency>
 		<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-actuator</artifactId>
-		<version>3.3.1</version>
-	    </dependency>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 		<groupId>org.springframework.security</groupId>
 		<artifactId>spring-security-config</artifactId>
